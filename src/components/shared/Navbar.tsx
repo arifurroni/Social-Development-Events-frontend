@@ -61,7 +61,7 @@ export default function Navbar({
           </div>
 
           <span className="text-xl font-bold tracking-tight text-[#166534] sm:text-2xl">
-            Event<span className="text-[#16A36A]">Connect</span>
+            Together<span className="text-[#16A36A]">We</span>
           </span>
         </Link>
 
@@ -149,7 +149,7 @@ export default function Navbar({
                     alt=""
                     className="h-8 w-8 rounded-md object-contain"
                   />
-                  EventConnect
+                  TogetherWe
                 </Link>
 
                 <div className="h-px bg-green-200" />
