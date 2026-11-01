@@ -1,7 +1,6 @@
 
 import Link from "next/link";
 import {
-  CalendarHeart,
   Mail,
   MapPin,
   ArrowUpRight,
@@ -46,6 +45,10 @@ const Footer = () => {
               meaningful social impact through collaborative events.
               Together, we can make a difference!
             </p>
+
+            <div>
+                <p>100% Volunteer Driven</p>
+            </div>
 
             {/* Social Media */}
             <div className="mt-7">
@@ -92,6 +95,10 @@ const Footer = () => {
                   );
                 })}
               </div> */}
+            </div>
+            <br />
+            <div>
+                <p className="flex gap-1"> <MapPin size={17} />  Khulna, Bangladesh</p>
             </div>
           </div>
 
@@ -199,7 +206,7 @@ const Footer = () => {
           <div className="flex flex-col items-center justify-between gap-5 text-center sm:flex-row sm:text-left">
 
             <p className="text-sm text-green-100/60">
-              © 2026 EventConnect. All rights reserved.
+              © 2026 TogetherWe. All rights reserved.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-green-100/60">
