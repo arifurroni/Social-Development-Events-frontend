@@ -149,7 +149,7 @@ export function Banner() {
         </svg>
       </div>
 
-      <div className="relative z-10 mx-auto grid max-w-7xl gap-14 px-5 pt-14 pb-28 sm:px-8 lg:grid-cols-2 lg:items-center lg:gap-8 lg:px-10 lg:pt-16 lg:pb-40">
+      <div className="relative z-10 mx-auto grid max-w-7xl gap-14 px-5 pt-10 pb-28 sm:px-8 lg:grid-cols-2 lg:items-center lg:gap-8 lg:px-10 lg:pt-16 lg:pb-40">
         {/* Left Content */}
         <div className="max-w-xl">
           {/* Logo */}
@@ -179,20 +179,20 @@ export function Banner() {
           </Link>
 
           {/* Tagline */}
-          <p className="mt-5 text-lg font-semibold text-[#172B24] sm:text-xl">
+          <p className="mt-3 text-lg font-semibold text-[#172B24] sm:text-xl">
             <span className="text-[#16A36A]">Social Development</span> Events
             Management Platform.
           </p>
           <span className="mt-2 block h-1 w-28 rounded-full bg-linear-to-r from-[#16A36A] to-[#BBF7D0]" />
 
           {/* Headline */}
-          <h1 className="mt-6 text-4xl leading-[1.15] font-extrabold tracking-tight text-[#14432B] sm:text-5xl lg:text-[3.4rem]">
+          <h1 className="mt-5 text-4xl leading-[1.15] font-extrabold tracking-tight text-[#14432B] sm:text-5xl lg:text-[3.4rem]">
             Together, We Can Make a{" "}
             <span className="text-[#16A36A]">Difference.</span>
           </h1>
 
           {/* Core Values */}
-          <ul className="mt-8 inline-flex flex-wrap items-center gap-x-5 gap-y-2 rounded-full border border-[#16A36A]/25 bg-white/70 px-6 py-3 shadow-[0_10px_30px_-22px_rgba(22,101,52,0.5)] backdrop-blur-sm">
+          <ul className="mt-4 inline-flex flex-wrap items-center gap-x-5 gap-y-2 rounded-full border border-[#16A36A]/25 bg-white/70 px-5 py-2 shadow-[0_10px_30px_-22px_rgba(22,101,52,0.5)] backdrop-blur-sm">
             {values.map(({ icon: Icon, label }, index) => (
               <Fragment key={label}>
                 {index > 0 && (
@@ -216,19 +216,29 @@ export function Banner() {
           </ul>
 
           {/* Quote */}
-          <blockquote className="mt-8 border-l-4 border-[#16A36A] pl-5 text-lg leading-8 text-[#2C3E36]">
+          <blockquote className="mt-4 border-l-4 border-[#16A36A] pl-5 text-lg leading-8 text-[#2C3E36]">
             “Connect with compassionate people, organize community initiatives,
             and create meaningful change in your neighborhood.”
           </blockquote>
 
           {/* Call To Action */}
-          <Link
-            href="/login"
-            className="group mt-9 inline-flex items-center gap-3 rounded-xl bg-[#16A36A] px-8 py-4 text-lg font-bold text-white shadow-xl shadow-[#16A36A]/25 transition-colors duration-200 hover:bg-[#166534]"
-          >
-            Join Our Community
-            <ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
-          </Link>
+          <div className="flex gap-3">
+            <Link
+              href="/login"
+              className="group mt-4 inline-flex items-center gap-3 rounded-xl bg-[#16A36A] px-5 py-2 text-md font-bold text-white shadow-xl shadow-[#16A36A]/25 transition-colors duration-200 hover:bg-[#166534]"
+            >
+              Explore Upcoming Events
+              <ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
+            </Link>
+
+            <Link
+              href="/login"
+              className="group mt-4 inline-flex items-center gap-3 border-2 border-[#166534] rounded-xl bg-[#F0FDF4] px-5 py-2 text-md font-bold text-[#172B24] shadow-xl shadow-[#16A36A]/25 transition-colors duration-200 hover:bg-[#16A36A]"
+            >
+              Join Our Community
+              <ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
+            </Link>
+          </div>
         </div>
 
         {/* Right Visual */}
@@ -323,11 +333,11 @@ export function Banner() {
         </div>
 
         {/* Stats */}
-        <div className="mx-auto mt-14 grid max-w-4xl grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
+        <div className="mx-auto mt-4 grid max-w-4xl grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="rounded-2xl border border-[#E3EDE7] bg-white px-4 py-6 text-center shadow-[0_12px_34px_-24px_rgba(22,101,52,0.4)]"
+              className="rounded-2xl border border-[#E3EDE7] bg-white px-2 py-3 text-center shadow-[0_12px_34px_-24px_rgba(22,101,52,0.4)]"
             >
               <p
                 className={cn(
