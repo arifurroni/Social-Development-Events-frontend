@@ -65,6 +65,7 @@ export default function Navbar({
           </span>
         </Link>
 
+
         {/* Desktop Navigation */}
         <div className="hidden items-center md:flex">
           <Link
@@ -74,6 +75,7 @@ export default function Navbar({
             Upcoming Events
           </Link>
         </div>
+
 
         {/* Right Side - Authentication */}
         <div className="hidden items-center gap-3 md:flex">
@@ -93,6 +95,13 @@ export default function Navbar({
               </DropdownMenuTrigger>
 
               <DropdownMenuContent align="end" className="w-52">
+                <DropdownMenuItem>
+                  <Link href="/add-event" className="flex items-center">
+                    <LayoutDashboard className="mr-2 h-4 w-4" />
+                    Add Event
+                  </Link>
+                </DropdownMenuItem>
+
                 <DropdownMenuItem>
                   <Link href="/dashboard" className="flex items-center">
                     <LayoutDashboard className="mr-2 h-4 w-4" />
@@ -126,6 +135,7 @@ export default function Navbar({
             </Link>
           )}
         </div>
+
 
         {/* Mobile Navigation */}
         <div className="md:hidden">

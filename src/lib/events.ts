@@ -1,3 +1,4 @@
+
 export type CommunityEvent = {
   _id: string;
   title: string;
@@ -71,12 +72,6 @@ export async function getUpcomingEvents(): Promise<CommunityEvent[]> {
   );
 }
 
-export async function getUpcomingEvent(
-  eventId: string,
-): Promise<CommunityEvent | null> {
-  const events = await getUpcomingEvents();
-  return events.find((event) => event._id === eventId) ?? null;
-}
 
 export function getEventCategory(eventType: string) {
   return (

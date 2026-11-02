@@ -17,7 +17,7 @@ import {
   formatEventDate,
   getEventCategory,
   getEventImage,
-  getUpcomingEvent,
+  
 } from "@/lib/events";
 
 const categoryColors: Record<string, string> = {
@@ -33,13 +33,11 @@ function getOrganizerInitials(email: string) {
   return email.slice(0, 1).toUpperCase();
 }
 
-export default async function EventDetailsPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+export default async function EventDetailsPage({ params, }: { params: Promise<{ id: string }>}) {
   const { id } = await params;
-  const event = await getUpcomingEvent(id);
+
+  const res = await fetch(`http://localhost:8000/event/${id}`);
+  const event = await res.json();
 
   if (!event) {
     notFound();

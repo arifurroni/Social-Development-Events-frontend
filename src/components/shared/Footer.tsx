@@ -1,17 +1,14 @@
 
+
 import Link from "next/link";
-import {
-  Mail,
-  MapPin,
-  ArrowUpRight,
-  Heart,
-} from "lucide-react";
+import { Mail, MapPin, ArrowUpRight, Heart, } from "lucide-react";
 import navLogo from "../../../public/images/logo_navbar.png";
 import Image from "next/image";
 
 
 const Footer = () => {
   return (
+
     <footer className="relative overflow-hidden bg-[#123F2B] text-white">
 
       {/* Decorative Background */}
@@ -32,13 +29,16 @@ const Footer = () => {
               alt=""
               className="h-11 w-11 rounded-xl object-contain"
             />
+
                 {/* <CalendarHeart size={28} /> */}
               </div>
+
 
               <span className="text-2xl font-bold tracking-tight">
                 Together<span className="text-[#4ADE80]">We</span>
               </span>
             </Link>
+
 
             <p className="mt-5 max-w-xs text-sm leading-7 text-green-100/70">
               Connecting people, empowering communities, and creating
@@ -46,15 +46,18 @@ const Footer = () => {
               Together, we can make a difference!
             </p>
 
+
             <div>
                 <p>100% Volunteer Driven</p>
             </div>
+
 
             {/* Social Media */}
             <div className="mt-7">
               <p className="mb-4 text-sm font-semibold text-white">
                 Follow Our Community
               </p>
+
 
               {/* <div className="flex items-center gap-3">
                 {[
@@ -102,12 +105,15 @@ const Footer = () => {
             </div>
           </div>
 
+
           {/* Quick Links */}
           <div>
+
             <h3 className="mb-6 text-lg font-semibold">
               Quick Links
               <span className="mt-2 block h-1 w-10 rounded-full bg-[#16A36A]" />
             </h3>
+
 
             <ul className="space-y-4 text-sm text-green-100/70">
               {[
@@ -130,6 +136,7 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
+
           </div>
 
           {/* Community */}
@@ -157,6 +164,7 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
+
           </div>
 
           {/* Contact Section */}
@@ -190,6 +198,7 @@ const Footer = () => {
               </div>
             </div>
 
+
             {/* CTA */}
             <Link
               href="/upcoming-events"
@@ -200,6 +209,7 @@ const Footer = () => {
             </Link>
           </div>
         </div>
+
 
         {/* Bottom Footer */}
         <div className="border-t border-green-100/15 py-7">
@@ -230,11 +240,14 @@ const Footer = () => {
               <Heart size={15} className="fill-red-400 text-red-400" />
               for communities
             </p>
+
           </div>
         </div>
       </div>
+
     </footer>
   );
+  
 };
 
 export default Footer;
