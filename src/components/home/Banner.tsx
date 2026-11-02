@@ -224,7 +224,7 @@ export function Banner() {
           {/* Call To Action */}
           <div className="flex gap-3">
             <Link
-              href="/login"
+              href="/upcoming-events"
               className="group mt-4 inline-flex items-center gap-3 rounded-xl bg-[#16A36A] px-5 py-2 text-md font-bold text-white shadow-xl shadow-[#16A36A]/25 transition-colors duration-200 hover:bg-[#166534]"
             >
               Explore Upcoming Events
