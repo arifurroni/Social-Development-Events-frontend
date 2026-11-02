@@ -102,7 +102,7 @@ export default function AddEventPage() {
 
     const data = await res.json();
 
-    toast.success("Event has been created")
+    toast.success("Event has been created successfully.")
     console.log(data);
 
   }
@@ -184,9 +184,12 @@ export default function AddEventPage() {
                   <SelectItem value="community-support">
                     Community support
                   </SelectItem>
+                  <SelectItem value="distribution-clothing">Distribution clothing</SelectItem>
                   <SelectItem value="cleanup">Community cleanup</SelectItem>
-                  <SelectItem value="tree-planting">Tree planting</SelectItem>
+                  <SelectItem value="tree-planting">Plantation</SelectItem>
                   <SelectItem value="education">Education</SelectItem>
+                  <SelectItem value="health">Health</SelectItem>
+                  <SelectItem value="food">Food</SelectItem>
                   <SelectItem value="other">Other</SelectItem>
                 </SelectContent>
               </Select>

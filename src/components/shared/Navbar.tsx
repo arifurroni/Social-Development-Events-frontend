@@ -165,6 +165,14 @@ export default function Navbar({
                 {user ? (
                   <>
                     <Link
+                      href="/add-event"
+                      onClick={() => setOpen(false)}
+                      className="rounded-lg px-3 py-3 font-medium text-[#172B24] hover:bg-green-100"
+                    >
+                      Add Event
+                    </Link>
+
+                    <Link
                       href="/dashboard"
                       onClick={() => setOpen(false)}
                       className="rounded-lg px-3 py-3 font-medium text-[#172B24] hover:bg-green-100"
