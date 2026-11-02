@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowRight,
   CalendarDays,
-  Clock3,
   MapPin,
   Tag,
   UserRound,
@@ -12,36 +12,11 @@ import {
 
 import { Button } from "@/components/ui/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import type { CommunityEvent } from "@/lib/events";
-
-const categoryLabels: Record<string, string> = {
-  donation: "Donation",
-  food: "Food support",
-  education: "Education",
-  health: "Health",
-  "tree-planting": "Tree planting",
-  "community-support": "Community support",
-  cleanup: "Cleanup",
-  "blood-donation": "Blood donation",
-  other: "Community event",
-};
-
-const fallbackImages: Record<string, string> = {
-  donation: "/images/blood_donation.png",
-  food: "/images/food_distribute.png",
-  education: "/images/education.png",
-  health: "/images/Health.png",
-  "tree-planting": "/images/plantation.png",
-  "blood-donation": "/images/blood_donation.png",
-};
+  formatEventDate,
+  getEventCategory,
+  getEventImage,
+  type CommunityEvent,
+} from "@/lib/events";
 
 const categoryColors: Record<string, string> = {
   donation: "bg-rose-50 text-rose-700 ring-rose-200",
@@ -52,43 +27,9 @@ const categoryColors: Record<string, string> = {
   "blood-donation": "bg-rose-50 text-rose-700 ring-rose-200",
 };
 
-function formatEventDate(value: string) {
-  const date = new Date(`${value}T12:00:00`);
-
-  if (Number.isNaN(date.getTime())) {
-    return value;
-  }
-
-  return new Intl.DateTimeFormat("en-US", {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  }).format(date);
-}
-
-function getCategoryLabel(eventType: string) {
-  return (
-    categoryLabels[eventType] ??
-    eventType
-      .split(/[-_]/)
-      .filter(Boolean)
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ")
-  );
-}
-
-function getEventImage(event: CommunityEvent) {
-  if (/^https?:\/\//i.test(event.imageUrl)) {
-    return event.imageUrl;
-  }
-
-  return fallbackImages[event.eventType] ?? "/images/plantation.png";
-}
-
 export function EventCard({ event }: { event: CommunityEvent }) {
   const eventDate = formatEventDate(event.eventDate);
-  const category = getCategoryLabel(event.eventType);
+  const category = getEventCategory(event.eventType);
   const categoryColor =
     categoryColors[event.eventType] ?? "bg-[#EAF7EF] text-[#16734F] ring-[#CBE5D3]";
 
@@ -154,82 +95,16 @@ export function EventCard({ event }: { event: CommunityEvent }) {
           </span>
         </div>
 
-        <Dialog>
-          <DialogTrigger
-            render={
-              <Button className="mt-5 h-11 w-full rounded-xl bg-[#109987] text-sm font-bold text-white shadow-[0_8px_20px_-14px_rgba(16,153,135,0.8)] hover:bg-[#0D806F] focus-visible:ring-[#109987]/30" />
-            }
-          >
-            View event
-            <ArrowRight aria-hidden="true" className="h-4 w-4" />
-          </DialogTrigger>
-          <DialogContent className="max-h-[90vh] overflow-y-auto rounded-2xl border-[#E1EAE4] p-0 sm:max-w-xl">
-            <div className="relative aspect-[1.8] overflow-hidden bg-[#E8F2EB]">
-              <Image
-                alt={event.title}
-                className="object-cover"
-                fill
-                sizes="(max-width: 640px) 100vw, 576px"
-                src={getEventImage(event)}
-                unoptimized
-              />
-            </div>
-            <div className="px-5 pb-5 sm:px-6 sm:pb-6">
-              <DialogHeader className="gap-3">
-                <span
-                  className={`w-fit rounded-full px-3 py-1 text-xs font-bold ring-1 ring-inset ${categoryColor}`}
-                >
-                  {category}
-                </span>
-                <DialogTitle className="pr-8 text-2xl leading-tight font-bold text-[#172B24]">
-                  {event.title}
-                </DialogTitle>
-                <DialogDescription className="text-sm leading-6 text-[#687970]">
-                  {event.description}
-                </DialogDescription>
-              </DialogHeader>
-
-              <div className="mt-5 grid gap-3 rounded-xl bg-[#F4FAF6] p-4 text-sm text-[#46594E] sm:grid-cols-2">
-                <p className="flex items-start gap-2">
-                  <CalendarDays
-                    aria-hidden="true"
-                    className="mt-0.5 h-4 w-4 shrink-0 text-[#16835A]"
-                  />
-                  <span>{eventDate}</span>
-                </p>
-                <p className="flex items-start gap-2">
-                  <MapPin
-                    aria-hidden="true"
-                    className="mt-0.5 h-4 w-4 shrink-0 text-[#16835A]"
-                  />
-                  <span>{event.location}</span>
-                </p>
-                <p className="flex items-start gap-2 sm:col-span-2">
-                  <Clock3
-                    aria-hidden="true"
-                    className="mt-0.5 h-4 w-4 shrink-0 text-[#16835A]"
-                  />
-                  <span>
-                    Contact the organizer for event timing and participation
-                    details.
-                  </span>
-                </p>
-              </div>
-
-              <DialogFooter className="mt-5 rounded-xl border-0 bg-transparent p-0 sm:justify-between">
-                <a
-                  className="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-[#16835A] px-4 text-sm font-semibold text-white transition hover:bg-[#166534] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#16835A]"
-                  href={`mailto:${event.organizerEmail}?subject=${encodeURIComponent(`Question about ${event.title}`)}`}
-                >
-                  Contact organizer
-                </a>
-                <span className="self-center text-xs text-[#77847D]">
-                  {event.organizerEmail}
-                </span>
-              </DialogFooter>
-            </div>
-          </DialogContent>
-        </Dialog>
+        <Button
+          className="mt-5 h-11 w-full rounded-xl bg-[#109987] text-sm font-bold text-white shadow-[0_8px_20px_-14px_rgba(16,153,135,0.8)] hover:bg-[#0D806F] focus-visible:ring-[#109987]/30"
+          nativeButton={false}
+          render={
+            <Link href={`/upcoming-events/${encodeURIComponent(event._id)}`} />
+          }
+        >
+          View event
+          <ArrowRight aria-hidden="true" className="h-4 w-4" />
+        </Button>
       </div>
     </article>
   );
