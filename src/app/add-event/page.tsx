@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
 
 const imagePresets = [
   {
@@ -58,7 +59,7 @@ export default function AddEventPage() {
     message: string;
   } | null>(null);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!eventType) {
@@ -82,6 +83,28 @@ export default function AddEventPage() {
       message:
         "Your details look good, but event publishing is not connected yet. Your event has not been published.",
     });
+
+    const res = await fetch("http://localhost:8000/add-event", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: String(formData.get("title") ?? ""),
+          eventType,
+            eventDate,
+            location: String(formData.get("location") ?? ""),
+            imageUrl,
+            description: String(formData.get("description") ?? ""),
+            organizerEmail: String(formData.get("organizerEmail") ?? ""),
+        }),
+    });
+
+    const data = await res.json();
+
+    toast.success("Event has been created")
+    console.log(data);
+
   }
 
   return (
