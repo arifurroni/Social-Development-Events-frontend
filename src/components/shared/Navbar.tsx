@@ -104,6 +104,15 @@ export default function Navbar() {
 
               <DropdownMenuContent align="end" className="w-52">
                 <DropdownMenuItem>
+                  <div className="flex flex-col justify-center items-center rounded-xl bg-[#D9F0E2] px-3 py-1">
+                    <h2 className="font-bold">{user.name}</h2>
+                    <h3>{user.email}</h3>
+                  </div>
+                </DropdownMenuItem>
+
+                <DropdownMenuSeparator />
+
+                <DropdownMenuItem>
                   <Link href="/add-event" className="flex items-center">
                     <LayoutDashboard className="mr-2 h-4 w-4" />
                     Add Event
@@ -128,8 +137,8 @@ export default function Navbar() {
 
                 <DropdownMenuItem
                   onClick={() => {
-    void handleSignOut();
-  }}
+                    void handleSignOut();
+                  }}
                   className="text-red-600 focus:text-red-600"
                 >
                   <LogOut className="mr-2 h-4 w-4" />
@@ -173,6 +182,13 @@ export default function Navbar() {
 
                 <div className="h-px bg-green-200" />
 
+                <div className="flex flex-col justify-center items-center rounded-xl bg-[#D9F0E2] px-3 py-1">
+                  <h2 className="font-bold">{user?.name}</h2>
+                  <h3>{user?.email}</h3>
+                </div>
+
+                <div className="h-px bg-green-200" />
+
                 <Link
                   href="/upcoming-events"
                   onClick={() => setOpen(false)}
@@ -209,9 +225,9 @@ export default function Navbar() {
 
                     <Button
                       onClick={async () => {
-    setOpen(false);
-    await handleSignOut();
-  }}
+                        setOpen(false);
+                        await handleSignOut();
+                      }}
                       variant="outline"
                       className="border-red-200 text-red-600 hover:bg-red-50"
                     >
