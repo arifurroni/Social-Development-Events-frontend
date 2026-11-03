@@ -149,10 +149,10 @@ const Footer = () => {
             <ul className="space-y-4 text-sm text-green-100/70">
               {[
                 { name: "Explore Events", href: "/upcoming-events" },
-                // { name: "Create an Event", href: "/create-event" },
+                { name: "Create an Event", href: "/add-event" },
                 { name: "Volunteer", href: "/volunteer" },
-                // { name: "My Dashboard", href: "/dashboard" },
-                // { name: "My Profile", href: "/profile" },
+                { name: "My Dashboard", href: "/dashboard" },
+                { name: "My Profile", href: "/profile" },
               ].map((link) => (
                 <li key={link.name}>
                   <Link

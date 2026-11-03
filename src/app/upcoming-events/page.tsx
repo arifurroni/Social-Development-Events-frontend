@@ -68,14 +68,14 @@ export default async function UpcomingEventsPage() {
               difference together.
             </p>
           </div>
-          {/* <Button
+          <Button
             className="w-fit rounded-xl bg-[#16835A] px-5 text-white shadow-sm hover:bg-[#166534]"
             nativeButton={false}
             render={<Link href="/add-event" />}
           >
             <Plus aria-hidden="true" className="h-4 w-4" />
             Create an event
-          </Button> */}
+          </Button>
         </header>
 
         {events.length > 0 ? (
