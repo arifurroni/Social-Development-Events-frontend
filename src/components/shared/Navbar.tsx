@@ -30,22 +30,29 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import navLogo from "../../../public/images/logo_navbar.png";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 
-type NavbarProps = {
-  user?: {
-    name: string;
-    email?: string;
-    image?: string;
-  } | null;
-  onSignOutAction?: () => void;
-};
+export default function Navbar() {
+  const { data:session } = authClient.useSession();
+  const user = session?.user;
 
-export default function Navbar({
-  user = null,
-  onSignOutAction,
-}: NavbarProps) {
+  const handleSignOut = async () => {
+    try {
+      await authClient.signOut();
+      router.push("/login");
+      router.refresh();
+      toast.success("Logout successfully.")
+    } catch (error) {
+      toast.error(`Failed to sign out. ${error}`);
+    }
+  };
+
   const [open, setOpen] = useState(false);
+
+  const router = useRouter();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-green-100/70 bg-[#F0FDF4]/90 shadow-[0_8px_25px_-15px_rgba(22,101,52,0.35)] backdrop-blur-xl">
@@ -65,7 +72,6 @@ export default function Navbar({
           </span>
         </Link>
 
-
         {/* Desktop Navigation */}
         <div className="hidden items-center md:flex">
           <Link
@@ -76,14 +82,16 @@ export default function Navbar({
           </Link>
         </div>
 
-
         {/* Right Side - Authentication */}
         <div className="hidden items-center gap-3 md:flex">
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center gap-2 rounded-full px-2 hover:bg-green-100">
                 <Avatar className="h-9 w-9 border-2 border-green-200">
-                  <AvatarImage src={user.image || ""} />
+                  <AvatarImage
+                    referrerPolicy="no-referrer"
+                    src={user.image || ""}
+                  />
                   <AvatarFallback className="bg-green-100 font-semibold text-[#166534]">
                     {user.name?.charAt(0).toUpperCase()}
                   </AvatarFallback>
@@ -119,7 +127,9 @@ export default function Navbar({
                 <DropdownMenuSeparator />
 
                 <DropdownMenuItem
-                  onClick={onSignOutAction}
+                  onClick={() => {
+    void handleSignOut();
+  }}
                   className="text-red-600 focus:text-red-600"
                 >
                   <LogOut className="mr-2 h-4 w-4" />
@@ -135,7 +145,6 @@ export default function Navbar({
             </Link>
           )}
         </div>
-
 
         {/* Mobile Navigation */}
         <div className="md:hidden">
@@ -199,10 +208,10 @@ export default function Navbar({
                     </Link>
 
                     <Button
-                      onClick={() => {
-                        setOpen(false);
-                        onSignOutAction?.();
-                      }}
+                      onClick={async () => {
+    setOpen(false);
+    await handleSignOut();
+  }}
                       variant="outline"
                       className="border-red-200 text-red-600 hover:bg-red-50"
                     >

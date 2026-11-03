@@ -5,6 +5,7 @@ import { CalendarDays, Plus, SearchX } from "lucide-react";
 import { EventCard } from "@/components/events/EventCard";
 import { Button } from "@/components/ui/button";
 import { getUpcomingEvents } from "@/lib/events";
+import { toast } from "sonner";
 
 export default async function UpcomingEventsPage() {
   await connection();
@@ -14,7 +15,7 @@ export default async function UpcomingEventsPage() {
   try {
     events = await getUpcomingEvents();
   } catch (error) {
-    console.error("Failed to load upcoming events.", error);
+    toast.error(`"Failed to load upcoming events." ${error}`);
 
     return (
       <main className="flex flex-1 items-center bg-[#F4FAF6] px-5 py-20 sm:px-8">
@@ -67,14 +68,14 @@ export default async function UpcomingEventsPage() {
               difference together.
             </p>
           </div>
-          <Button
+          {/* <Button
             className="w-fit rounded-xl bg-[#16835A] px-5 text-white shadow-sm hover:bg-[#166534]"
             nativeButton={false}
             render={<Link href="/add-event" />}
           >
             <Plus aria-hidden="true" className="h-4 w-4" />
             Create an event
-          </Button>
+          </Button> */}
         </header>
 
         {events.length > 0 ? (
