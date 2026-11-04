@@ -23,6 +23,8 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+// import { authClient } from "@/lib/auth-client";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
 const imagePresets = [
   {
@@ -62,12 +64,18 @@ export default function AddEventPage() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // Capture the form before any async operation
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
     if (!eventType) {
-      setStatus({ kind: "error", message: "Please choose an event type." });
+      setStatus({
+        kind: "error",
+        message: "Please choose an event type.",
+      });
       return;
     }
 
-    const formData = new FormData(event.currentTarget);
     const eventDate = String(formData.get("eventDate") ?? "");
 
     if (eventDate < getLocalDateString(new Date())) {
@@ -78,34 +86,59 @@ export default function AddEventPage() {
       return;
     }
 
-    setStatus({
-      kind: "info",
-      message:
-        "Your details look good, but event publishing is not connected yet. Your event has not been published.",
-    });
+    try {
+      // const { data, error } = await authClient.token();
 
-    const res = await fetch("http://localhost:8000/add-event", {
+      // if (error || !data?.token) {
+      //   toast.error("Please log in first.");
+      //   return;
+      // }
+      const token = await getTokenFromClient();
+
+      const res = await fetch("http://localhost:8000/add-event", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          // authorization: `Bearer ${data.token}`,
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           title: String(formData.get("title") ?? ""),
           eventType,
-            eventDate,
-            location: String(formData.get("location") ?? ""),
-            imageUrl,
-            description: String(formData.get("description") ?? ""),
-            organizerEmail: String(formData.get("organizerEmail") ?? ""),
+          eventDate,
+          location: String(formData.get("location") ?? ""),
+          imageUrl,
+          description: String(formData.get("description") ?? ""),
+          organizerEmail: String(formData.get("organizerEmail") ?? ""),
         }),
-    });
+      });
 
-    const data = await res.json();
+      const result = await res.json();
 
-    toast.success("Event has been created successfully.")
-    console.log(data);
+      if (!res.ok) {
+        throw new Error(result.message || "Failed to create event.");
+      }
 
-  }
+      toast.success("Event has been created successfully.");
+
+      setStatus({
+        kind: "info",
+        message: "Your event has been published successfully!",
+      });
+
+      form.reset();
+      setEventType("");
+      setImageUrl("");
+
+      console.log(result);
+    } catch (error) {
+      console.error("Event creation error:", error);
+
+      toast.error(
+        error instanceof Error ? error.message : "Something went wrong."
+      );
+    }
+  };
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#F3F8F5] px-4 py-10 sm:px-6 sm:py-14">

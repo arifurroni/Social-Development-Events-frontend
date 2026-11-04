@@ -19,8 +19,8 @@ import {
   getEventImage,
   
 } from "@/lib/events";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+
+import { getTokenFromServer } from "@/lib/getTokenFromServer";
 
 const categoryColors: Record<string, string> = {
   donation: "bg-rose-50 text-rose-700 ring-rose-200",
@@ -41,11 +41,9 @@ function getOrganizerInitials(email?: string | null) {
 const EventDetailsPage = async ({ params, }: {params: Promise<{ id: string }>;}) => {
   const { id } = await params;
 
-  const jwtToken = await auth.api.getToken({
-    headers: await headers(),
-  });
-  const token = jwtToken?.token;
-console.log(token);
+  
+  const token = await getTokenFromServer();
+
   const res = await fetch(`http://localhost:8000/event/${id}`, {
     headers: {
       authorization: `Bearer ${token}`,
