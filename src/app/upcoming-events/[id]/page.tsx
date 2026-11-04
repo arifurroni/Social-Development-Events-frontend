@@ -19,6 +19,8 @@ import {
   getEventImage,
   
 } from "@/lib/events";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 const categoryColors: Record<string, string> = {
   donation: "bg-rose-50 text-rose-700 ring-rose-200",
@@ -29,25 +31,37 @@ const categoryColors: Record<string, string> = {
   "blood-donation": "bg-rose-50 text-rose-700 ring-rose-200",
 };
 
-function getOrganizerInitials(email: string) {
+function getOrganizerInitials(email?: string | null) {
+  if (!email) return "U";
+
   return email.slice(0, 1).toUpperCase();
 }
 
-export default async function EventDetailsPage({ params, }: { params: Promise<{ id: string }>}) {
+// export default async function EventDetailsPage({ params, }: { params: Promise<{ id: string }>; }) {
+const EventDetailsPage = async ({ params, }: {params: Promise<{ id: string }>;}) => {
   const { id } = await params;
 
-  const res = await fetch(`http://localhost:8000/event/${id}`);
-  const event = await res.json();
+  const jwtToken = await auth.api.getToken({
+    headers: await headers(),
+  });
+  const token = jwtToken?.token;
+console.log(token);
+  const res = await fetch(`http://localhost:8000/event/${id}`, {
+    headers: {
+      authorization: `Bearer ${token}`,
+    }
+  })
 
-  if (!event) {
-    notFound();
-  }
+  if (!res.ok) notFound();
+  
+  const event = await res.json();
+  
 
   const category = getEventCategory(event.eventType);
   const categoryColor =
     categoryColors[event.eventType] ??
     "bg-[#EAF7EF] text-[#16734F] ring-[#CBE5D3]";
-  const organizerName = event.organizerEmail.split("@")[0];
+  const organizerName = event.organizerEmail.split("@")[0] || "Event Organizer";
   const joinSubject = encodeURIComponent(`I'd like to join ${event.title}`);
 
   return (
@@ -237,3 +251,5 @@ export default async function EventDetailsPage({ params, }: { params: Promise<{ 
     </main>
   );
 }
+
+export default EventDetailsPage;

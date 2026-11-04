@@ -34,7 +34,6 @@ export default async function proxy(request: NextRequest) {
     if (!user) {
           return NextResponse.redirect(new URL('/login', request.url))
     }
-
 }
 
 

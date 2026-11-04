@@ -73,7 +73,11 @@ export async function getUpcomingEvents(): Promise<CommunityEvent[]> {
 }
 
 
-export function getEventCategory(eventType: string) {
+export const getEventCategory = (eventType?: string | null) => {
+  if (!eventType) {
+    return "Uncategorized";
+  }
+
   return (
     categoryLabels[eventType] ??
     eventType
@@ -82,7 +86,7 @@ export function getEventCategory(eventType: string) {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ")
   );
-}
+};
 
 export function getEventImage(event: CommunityEvent) {
   if (/^https?:\/\//i.test(event.imageUrl)) {
