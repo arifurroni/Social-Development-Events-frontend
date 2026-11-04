@@ -337,18 +337,18 @@ export function Banner() {
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="rounded-2xl border border-[#E3EDE7] bg-white px-2 py-3 text-center shadow-[0_12px_34px_-24px_rgba(22,101,52,0.4)]"
+              className="rounded-2xl border border-[#E3EDE7] bg-white px-2 py-1 text-center shadow-[0_12px_34px_-24px_rgba(22,101,52,0.4)]"
             >
               <p
                 className={cn(
-                  "text-xl font-extrabold tracking-tight",
+                  "text-md font-extrabold tracking-tight",
                   stat.valueClass,
                 )}
               >
                 {stat.value}
               </p>
 
-              <p className="mt-1.5 text-md font-medium text-[#5B6B64]">
+              <p className="mt-1.5 text-sm font-medium text-[#5B6B64]">
                 {stat.label}
               </p>
             </div>

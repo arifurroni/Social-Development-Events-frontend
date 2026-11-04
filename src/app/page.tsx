@@ -1,4 +1,5 @@
 import { Banner } from "@/components/home/Banner";
+import { RecentUpcomingEvents } from "@/components/home/RecentUpcomingEvents";
 import { PlatformFeatures } from "@/components/home/PlatformFeatures";
 import { EventGallery } from "@/components/home/EventGallery";
 import { VolunteerTestimonials } from "@/components/home/VolunteerTestimonials";
@@ -8,6 +9,7 @@ export default function Home() {
   return (
     <main>
       <Banner />
+      <RecentUpcomingEvents />
       <PlatformFeatures />
       <EventGallery />
       <VolunteerTestimonials />
