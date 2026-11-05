@@ -169,7 +169,7 @@ export default function Navbar() {
             </Link>
 
             <Link href="/signup">
-              <Button className="rounded-full bg-[#F1FDF5] px-6 font-semibold border border-[#16A36A] text-[#172B24] hover:bg-[#c8fce7]">
+              <Button className="rounded-full bg-[#F1FDF5] px-6 font-semibold border border-[#16A36A] text-[#172B24] hover:bg-[#D7EFE1]">
                 Register
               </Button>
             </Link>
@@ -282,7 +282,7 @@ export default function Navbar() {
                   </Link>
 
                   <Link href="/signup">
-                    <Button className="w-full rounded-full bg-[#F0FDF4] border border-[#166534] text-[#172B24] hover:bg-[#c8fce7]">
+                    <Button className="w-full rounded-full bg-[#F0FDF4] border border-[#166534] text-[#172B24] hover:bg-[#D7EFE1]">
                       Register
                     </Button>
                   </Link>
