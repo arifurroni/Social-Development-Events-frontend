@@ -205,6 +205,15 @@ export default function Navbar() {
                 <div className="h-px bg-green-200" />
 
                 <div className="flex flex-col justify-center items-center rounded-xl bg-[#D9F0E2] px-3 py-1">
+                  <Avatar className="h-11 w-11 border-2 border-green-200">
+                    <AvatarImage
+                      referrerPolicy="no-referrer"
+                      src={user?.image || ""}
+                    />
+                    <AvatarFallback className="bg-green-100 font-semibold text-[#166534]">
+                      {user?.name?.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
                   <h2 className="font-bold">{user?.name}</h2>
                   <h3>{user?.email}</h3>
                 </div>
