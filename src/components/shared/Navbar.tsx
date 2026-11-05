@@ -161,11 +161,19 @@ export default function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
+            <>
             <Link href="/login">
               <Button className="rounded-full bg-[#166534] px-7 font-semibold text-white hover:bg-[#16A36A]">
                 Login
               </Button>
             </Link>
+
+            <Link href="/signup">
+              <Button className="rounded-full bg-[#F1FDF5] px-6 font-semibold border border-[#16A36A] text-[#172B24] hover:bg-[#c8fce7]">
+                Register
+              </Button>
+            </Link>
+            </>
           )}
         </div>
 
@@ -222,6 +230,22 @@ export default function Navbar() {
                     </Link>
 
                     <Link
+                      href="/manage-events"
+                      onClick={() => setOpen(false)}
+                      className="rounded-lg px-3 py-3 font-medium text-[#172B24] hover:bg-green-100"
+                    >
+                      Manage Events
+                    </Link>
+
+                    <Link
+                      href="/joined-events"
+                      onClick={() => setOpen(false)}
+                      className="rounded-lg px-3 py-3 font-medium text-[#172B24] hover:bg-green-100"
+                    >
+                      Joined Events
+                    </Link>
+
+                    <Link
                       href="/dashboard"
                       onClick={() => setOpen(false)}
                       className="rounded-lg px-3 py-3 font-medium text-[#172B24] hover:bg-green-100"
@@ -250,11 +274,19 @@ export default function Navbar() {
                     </Button>
                   </>
                 ) : (
+                  <>
                   <Link href="/login">
                     <Button className="w-full rounded-full bg-[#166534] text-white hover:bg-[#16A36A]">
                       Login
                     </Button>
                   </Link>
+
+                  <Link href="/signup">
+                    <Button className="w-full rounded-full bg-[#F0FDF4] border border-[#166534] text-[#172B24] hover:bg-[#c8fce7]">
+                      Register
+                    </Button>
+                  </Link>
+                  </>
                 )}
               </div>
             </SheetContent>
