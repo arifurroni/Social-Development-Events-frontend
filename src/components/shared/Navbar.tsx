@@ -120,6 +120,20 @@ export default function Navbar() {
                 </DropdownMenuItem>
 
                 <DropdownMenuItem>
+                  <Link href="/manage-events" className="flex items-center">
+                    <LayoutDashboard className="mr-2 h-4 w-4" />
+                    Manage Events
+                  </Link>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem>
+                  <Link href="/joined-events" className="flex items-center">
+                    <LayoutDashboard className="mr-2 h-4 w-4" />
+                    Joined Events
+                  </Link>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem>
                   <Link href="/dashboard" className="flex items-center">
                     <LayoutDashboard className="mr-2 h-4 w-4" />
                     Dashboard
