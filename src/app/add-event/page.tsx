@@ -95,7 +95,7 @@ export default function AddEventPage() {
       // }
       const token = await getTokenFromClient();
 
-      const res = await fetch("http://localhost:8000/add-event", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/add-event`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -15,7 +15,7 @@ export async function RecentUpcomingEvents() {
 
   try {
     const res = await fetch(
-      "http://localhost:8000/recent-upcoming-events",
+      `${process.env.NEXT_PUBLIC_API_URL}/recent-upcoming-events`,
       {
         cache: "no-store",
       }
