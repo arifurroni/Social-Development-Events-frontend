@@ -134,7 +134,7 @@ public/
 - Accent: `#16A36A`
 - Background: `#F0FDF4`
 - Text: `#172B24`
-- Typography: Inter
+- Typography: Josefin_Sans
 
 ## Author
 
