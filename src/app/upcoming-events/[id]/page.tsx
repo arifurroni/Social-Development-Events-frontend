@@ -21,6 +21,7 @@ import {
 } from "@/lib/events";
 
 import { getTokenFromServer } from "@/lib/getTokenFromServer";
+import EditEventDialog from "@/components/EditEventDialog";
 
 const categoryColors: Record<string, string> = {
   donation: "bg-rose-50 text-rose-700 ring-rose-200",
@@ -69,13 +70,20 @@ const EventDetailsPage = async ({ params, }: {params: Promise<{ id: string }>;})
         className="pointer-events-none absolute -right-40 top-28 h-112 w-md rounded-full bg-[#E3F3E9] blur-3xl"
       />
       <div className="relative mx-auto max-w-6xl">
-        <Link
-          className="mb-5 inline-flex items-center gap-2 rounded-lg py-2 text-sm font-semibold text-[#64756B] transition hover:text-[#16835A] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#16835A]"
-          href="/upcoming-events"
-        >
-          <ArrowLeft aria-hidden="true" className="h-4 w-4" />
-          Back to upcoming events
-        </Link>
+        
+        <div className="flex justify-between items-center">
+          <Link
+            className="mb-5 inline-flex items-center gap-2 rounded-lg py-2 text-sm font-semibold text-[#64756B] transition hover:text-[#16835A] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#16835A]"
+            href="/upcoming-events"
+          >
+            <ArrowLeft aria-hidden="true" className="h-4 w-4" />
+            Back to upcoming events
+          </Link>
+
+          <div>
+            <EditEventDialog editEvent={event} />
+          </div>
+        </div>
 
         <article className="overflow-hidden rounded-[1.75rem] border border-[#E1EAE4] bg-white shadow-[0_24px_70px_-40px_rgba(23,43,36,0.3)]">
           <header className="relative isolate flex min-h-88 items-end overflow-hidden bg-[#1D3429] sm:min-h-112">
